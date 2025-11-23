@@ -499,15 +499,20 @@
             });
             
             // Return to Survey functionality
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnURL = urlParams.get("returnURL");
+            
+            function returnToSurvey() {
+                const surveyUrl = returnURL ? decodeURIComponent(returnURL) : 'https://gmusom.az1.qualtrics.com/jfe/form/SV_5b8gzO5cMPxKY9U';
+                window.location.href = surveyUrl;
+            }
+            
             const returnSurveyBtn = document.getElementById('return-survey-btn');
             returnSurveyBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const surveyUrl = 'https://gmusom.az1.qualtrics.com/jfe/form/SV_5b8gzO5cMPxKY9U';
-                
-                // Navigate to survey
-                window.location.href = surveyUrl;
+                returnToSurvey();
                 
                 // Try to close the window (works if opened by JavaScript/popup)
                 // Note: Browsers block closing tabs that user opened directly
